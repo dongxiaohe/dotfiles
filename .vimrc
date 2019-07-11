@@ -1,4 +1,4 @@
-"set tabstop=4
+set tabstop=4
 "syntax enable
 "set expandtab
 "set number
@@ -8,38 +8,30 @@
 "call pathogen#helptags()
 "imap <C-Return> <CR><CR><C-o>k<Tab>
 "set shiftwidth=4
-call plug#begin()
-
-Plug 'fatih/vim-go'
-" enable syntax highlighting
-syntax enable
-
-" show line numbers
 set number
 
-" set tabs to have 4 spaces
-set ts=4
+call plug#begin('~/.vim/plugged')
 
-" indent when moving to the next line while writing code
-set autoindent
+" NERD tree will be loaded on the first invocation of NERDTreeToggle command
+Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
+autocmd vimenter * NERDTree
+autocmd StdinReadPre * let s:std_in=1
+autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists("s:std_in") | exe 'NERDTree' argv()[0] | wincmd p | ene | exe 'cd '.argv()[0] | endif
+let NERDTreeMinimalUI = 1
+let NERDTreeDirArrows = 1
 
-" expand tabs into spaces
-set expandtab
+" Make sure you use single quotes
 
-" when using the >> or << commands, shift lines by 4 spaces
-set shiftwidth=4
+" Shorthand notation; fetches https://github.com/junegunn/vim-easy-align
+Plug 'junegunn/vim-easy-align'
 
-" show a visual line under the cursor's current line
-set cursorline
+" Using a non-master branch
+Plug 'rdnetto/YCM-Generator', { 'branch': 'stable' }
 
-" show the matching part of the pair for [] {} and ()
-set showmatch
+" Using a tagged release; wildcard allowed (requires git 1.9.2 or above)
+Plug 'fatih/vim-go', { 'tag': '*' }
 
-" enable wildmenu
-set wildmenu
-
-" enable all Python syntax highlighting features
-let python_highlight_all = 1
-
+Plug 'iCyMind/NeoSolarized'
 
 call plug#end()
+
